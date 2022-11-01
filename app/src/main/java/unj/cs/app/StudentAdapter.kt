@@ -5,6 +5,7 @@ import android.widget.TextView
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import unj.cs.app.data.Student
 import unj.cs.app.data.StudentList
@@ -42,5 +43,10 @@ class StudentAdapter(context: Context): RecyclerView.Adapter<StudentAdapter.Stud
         val name:String = studentList[position].name
         holder.idTextView.text = id
         holder.nameTextView.text = name
+
+        holder.itemView.setOnClickListener(){
+            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment( argPosition = position, argStudentId = id, argStudentName = name)
+            holder.view.findNavController().navigate(action)
+        }
     }
 }

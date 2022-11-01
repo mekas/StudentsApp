@@ -58,20 +58,22 @@ class StudentListFragment : Fragment() {
         studentRecyclerView.addItemDecoration(
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         )
+
         activity?.title = "Student List"
 
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
 
         fab.setOnClickListener(){
-            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment("","")
+            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment(null, null, argPosition = -1 )
             view.findNavController().navigate(action)
         }
     }
 
+
+
     override fun onStart() {
         super.onStart()
         studentRecyclerView.invalidate()
-        Toast.makeText(context, toastParam, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroyView(){

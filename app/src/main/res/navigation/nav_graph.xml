@@ -13,7 +13,6 @@
         <action
             android:id="@+id/action_studentListFragment_to_studentFormFragment"
             app:destination="@id/studentFormFragment" />
-        <argument android:name="argToast" />
     </fragment>
     <fragment
         android:id="@+id/studentFormFragment"
@@ -25,9 +24,14 @@
             app:destination="@id/studentListFragment" />
         <argument
             android:name="argStudentId"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
         <argument
             android:name="argStudentName"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="argPosition"
+            app:argType="integer" />
     </fragment>
 </navigation>
