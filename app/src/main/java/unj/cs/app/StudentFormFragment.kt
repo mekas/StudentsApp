@@ -57,6 +57,7 @@ class StudentFormFragment : Fragment() {
         val idText = view.findViewById<TextInputEditText>(R.id.inputStudentId)
         val nameText = view.findViewById<TextInputEditText>(R.id.inputStudentName)
 
+
         if (positionParam!! >= 0) {
             addStudentBtn.text = view.context.resources.getString(R.string.edit_button_label)
         } else {
