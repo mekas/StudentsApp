@@ -15,12 +15,12 @@ class StudentAdapter(context: Context, viewModel: StudentViewModel): RecyclerVie
     //private var studentList:MutableList<Student> = StudentList.list
     private val viewModel: StudentViewModel = viewModel
     init{
-        if(viewModel.studentList.isEmpty()){
+        if(viewModel.studentList.value!!.isEmpty()){
             val names = context.resources.getStringArray(R.array.student_names).toList()
             val ids = context.resources.getStringArray(R.array.student_ids).toList()
             for (i in names.indices){
                 val student = Student(ids[i], names[i])
-                viewModel.studentList.add(student)
+                viewModel.addStudent(student)
             }
         }
     }
@@ -31,7 +31,7 @@ class StudentAdapter(context: Context, viewModel: StudentViewModel): RecyclerVie
     }
 
     override fun getItemCount(): Int {
-        return viewModel.studentList.size
+        return viewModel.studentList.value!!.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
@@ -41,8 +41,8 @@ class StudentAdapter(context: Context, viewModel: StudentViewModel): RecyclerVie
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         //val context = holder.view.context
-        val id:String = viewModel.studentList[position].id
-        val name:String = viewModel.studentList[position].name
+        val id:String = viewModel.getStudent(position).uid
+        val name:String = viewModel.getStudent(position).name
         holder.idTextView.text = id
         holder.nameTextView.text = name
 

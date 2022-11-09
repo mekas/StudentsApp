@@ -1,10 +1,10 @@
 package unj.cs.app.data
 
-class Student{
-    var id:String
-    var name:String
-    constructor(id:String, name:String){
-        this.id = id
-        this.name = name
-    }
-}
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+data class Student(
+    val uid:String,
+    val name:String
+)

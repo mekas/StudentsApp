@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputEditText
+import unj.cs.app.data.Database
 import unj.cs.app.data.Student
 import unj.cs.app.data.StudentViewModel
 import unj.cs.app.databinding.FragmentStudentFormBinding
@@ -33,7 +34,8 @@ class StudentFormFragment : Fragment() {
 
     private var _binding: FragmentStudentFormBinding? = null
     private val binding get() = _binding!!
-    val viewModel: StudentViewModel by viewModels()
+    private val viewModel: StudentViewModel by viewModels()
+    //val studentDao = Database.getInstance(requireContext()).student
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,15 +79,15 @@ class StudentFormFragment : Fragment() {
             val student = Student(idText.text.toString(), nameText.text.toString())
             //val studentList: MutableList<Student> = StudentList.list
 
-
             lateinit var toastMessage: String
             idParam?.let {
                 nameParam?.let {
-                    viewModel.studentList[positionParam!!] = student
+                    //viewModel._studentList[positionParam!!] = student
+                    viewModel.setStudent(student, positionParam!!)
                     toastMessage = "Student data was Edited"
                 }
             } ?: run {
-                viewModel.studentList.add(student)
+                viewModel.addStudent(student)
                 toastMessage = "${student.name} was Added"
             }
 

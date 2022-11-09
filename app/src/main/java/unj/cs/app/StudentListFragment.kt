@@ -51,7 +51,7 @@ class StudentListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentStudentListBinding.inflate(inflater, container, false)
-        _binding!!.viewModel = viewModel
+        //_binding!!.viewModel = viewModel
         return binding.root
     }
 
