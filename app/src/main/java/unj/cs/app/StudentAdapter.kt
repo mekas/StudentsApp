@@ -9,16 +9,18 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import unj.cs.app.data.Student
 import unj.cs.app.data.StudentList
+import unj.cs.app.data.StudentViewModel
 
-class StudentAdapter(context: Context): RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
-    private var studentList:MutableList<Student> = StudentList.list
+class StudentAdapter(context: Context, viewModel: StudentViewModel): RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
+    //private var studentList:MutableList<Student> = StudentList.list
+    private val viewModel: StudentViewModel = viewModel
     init{
-        if(studentList.isEmpty()){
+        if(viewModel.studentList.isEmpty()){
             val names = context.resources.getStringArray(R.array.student_names).toList()
             val ids = context.resources.getStringArray(R.array.student_ids).toList()
             for (i in names.indices){
                 val student = Student(ids[i], names[i])
-                studentList.add(student)
+                viewModel.studentList.add(student)
             }
         }
     }
@@ -29,7 +31,7 @@ class StudentAdapter(context: Context): RecyclerView.Adapter<StudentAdapter.Stud
     }
 
     override fun getItemCount(): Int {
-        return studentList.size
+        return viewModel.studentList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
@@ -39,8 +41,8 @@ class StudentAdapter(context: Context): RecyclerView.Adapter<StudentAdapter.Stud
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         //val context = holder.view.context
-        val id:String = studentList[position].id
-        val name:String = studentList[position].name
+        val id:String = viewModel.studentList[position].id
+        val name:String = viewModel.studentList[position].name
         holder.idTextView.text = id
         holder.nameTextView.text = name
 

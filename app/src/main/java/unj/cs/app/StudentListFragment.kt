@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import unj.cs.app.data.Student
+import unj.cs.app.data.StudentViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,13 +34,15 @@ class StudentListFragment : Fragment() {
     private var _binding: FragmentStudentListBinding? = null
     private val binding get() = _binding!!
     private lateinit var  studentRecyclerView: RecyclerView;
+    private val viewModel : StudentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             toastParam = it.getString(ARG_PARAM1)
         }
-        studentAdapter = StudentAdapter(requireContext())
+
+        studentAdapter = StudentAdapter(requireContext(), viewModel)
     }
 
     override fun onCreateView(
@@ -46,6 +51,7 @@ class StudentListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentStudentListBinding.inflate(inflater, container, false)
+        _binding!!.viewModel = viewModel
         return binding.root
     }
 
@@ -69,12 +75,11 @@ class StudentListFragment : Fragment() {
         }
     }
 
-
-
+    /*
     override fun onStart() {
         super.onStart()
         studentRecyclerView.invalidate()
-    }
+    }*/
 
     override fun onDestroyView(){
         super.onDestroyView()
