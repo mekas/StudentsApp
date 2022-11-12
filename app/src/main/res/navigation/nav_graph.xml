@@ -12,7 +12,20 @@
         tools:layout="@layout/fragment_student_list" >
         <action
             android:id="@+id/action_studentListFragment_to_studentFormFragment"
-            app:destination="@id/studentFormFragment" />
+            app:destination="@id/studentFormFragment" >
+            <argument
+                android:name="argPosition"
+                android:defaultValue="-1" />
+            <argument
+                android:name="arg_Id"
+                android:defaultValue="-1" />
+            <argument
+                android:name="argStudentId"
+                android:defaultValue="null" />
+            <argument
+                android:name="argStudentName"
+                android:defaultValue="null" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/studentFormFragment"
@@ -32,6 +45,9 @@
             app:nullable="true" />
         <argument
             android:name="argPosition"
+            app:argType="integer" />
+        <argument
+            android:name="arg_Id"
             app:argType="integer" />
     </fragment>
 </navigation>

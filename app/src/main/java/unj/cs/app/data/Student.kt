@@ -9,5 +9,5 @@ data class Student(
     val name:String
 ){
     @PrimaryKey(autoGenerate = true)
-    var _id: Int? = null
+    var _id: Int = -1
 }

@@ -70,7 +70,7 @@ class StudentListFragment : Fragment() {
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
 
         fab.setOnClickListener(){
-            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment(null, null, argPosition = -1 )
+            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment()
             view.findNavController().navigate(action)
         }
     }
@@ -97,7 +97,7 @@ class StudentListFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: String) =
             StudentListFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
@@ -107,3 +107,4 @@ class StudentListFragment : Fragment() {
         var studentAdapter:StudentAdapter?=null
     }
 }
+

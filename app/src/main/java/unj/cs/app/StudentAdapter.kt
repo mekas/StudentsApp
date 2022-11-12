@@ -42,13 +42,15 @@ class StudentAdapter(context: Context, viewModel: StudentViewModel): RecyclerVie
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         //val context = holder.view.context
-        val id:String = viewModel.getStudent(position).uid
-        val name:String = viewModel.getStudent(position).name
-        holder.idTextView.text = id
+        val student: Student = viewModel.getStudent(position)
+        val uid:String = student.uid
+        val name:String = student.name
+        val _id:Int = student._id
+        holder.idTextView.text = uid
         holder.nameTextView.text = name
 
         holder.itemView.setOnClickListener(){
-            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment( argPosition = position, argStudentId = id, argStudentName = name)
+            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment( argPosition = position, argStudentId = uid, argStudentName = name, argId = _id)
             holder.view.findNavController().navigate(action)
         }
     }

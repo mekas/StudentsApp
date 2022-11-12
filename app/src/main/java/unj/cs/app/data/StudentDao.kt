@@ -6,8 +6,12 @@ import androidx.room.*
 interface StudentDao {
     @Query("Select * from Student")
     suspend fun getAll(): List<Student>
+
     @Query("Select * from Student where uid = :uid")
     suspend fun getStudentByUid(uid: Int): List<Student>
+
+    @Query("Select * from Student where _id = :id")
+    suspend fun getStudentById(id: Int): List<Student>
 
     @Query("Select * from Student where name = :name")
     suspend fun getStudentByName(name: String): List<Student>
