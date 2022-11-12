@@ -5,20 +5,20 @@ import androidx.room.*
 @Dao
 interface StudentDao {
     @Query("Select * from Student")
-    fun getAll(): List<Student>
+    suspend fun getAll(): List<Student>
     @Query("Select * from Student where uid = :uid")
-    fun getStudentByUid(uid: Int)
+    suspend fun getStudentByUid(uid: Int): List<Student>
 
     @Query("Select * from Student where name = :name")
-    fun getStudentByName(name: String)
+    suspend fun getStudentByName(name: String): List<Student>
 
     @Query("Select * from Student where uid = :uid or name = :name")
-    fun getStudentOr(uid: Int, name: String)
+    suspend fun getStudentOr(uid: Int, name: String) : List<Student>
 
     @Insert
-    fun insert(vararg student: Student)
+    suspend fun insert(vararg student: Student)
     @Update
-    fun update(student: Student)
+    suspend fun update(student: Student)
     @Delete
-    fun delete(student: Student)
+    suspend fun delete(student: Student)
 }

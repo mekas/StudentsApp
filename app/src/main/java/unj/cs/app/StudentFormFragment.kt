@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputEditText
-import unj.cs.app.data.Database
+import kotlinx.coroutines.launch
 import unj.cs.app.data.Student
+import unj.cs.app.data.StudentDatabase
 import unj.cs.app.data.StudentViewModel
 import unj.cs.app.databinding.FragmentStudentFormBinding
 
@@ -35,7 +38,6 @@ class StudentFormFragment : Fragment() {
     private var _binding: FragmentStudentFormBinding? = null
     private val binding get() = _binding!!
     private val viewModel: StudentViewModel by viewModels()
-    //val studentDao = Database.getInstance(requireContext()).student
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +62,9 @@ class StudentFormFragment : Fragment() {
         val addStudentBtn = view.findViewById<Button>(R.id.addStudentButton)
         val idText = view.findViewById<TextInputEditText>(R.id.inputStudentId)
         val nameText = view.findViewById<TextInputEditText>(R.id.inputStudentName)
+
+        //val studentDao? = StudentDatabase.getInstance(view.context).studentDao()
+        val studentDao = StudentDatabase.getInstance(view.context).studentDao()
 
         if (positionParam!! >= 0) {
             addStudentBtn.text = view.context.resources.getString(R.string.edit_button_label)
@@ -87,7 +92,8 @@ class StudentFormFragment : Fragment() {
                     toastMessage = "Student data was Edited"
                 }
             } ?: run {
-                viewModel.addStudent(student)
+                //viewModel.addStudent(student)
+                viewModel.addStudent(student, studentDao)
                 toastMessage = "${student.name} was Added"
             }
 

@@ -15,6 +15,7 @@ class StudentAdapter(context: Context, viewModel: StudentViewModel): RecyclerVie
     //private var studentList:MutableList<Student> = StudentList.list
     private val viewModel: StudentViewModel = viewModel
     init{
+        /*
         if(viewModel.studentList.value!!.isEmpty()){
             val names = context.resources.getStringArray(R.array.student_names).toList()
             val ids = context.resources.getStringArray(R.array.student_ids).toList()
@@ -22,7 +23,7 @@ class StudentAdapter(context: Context, viewModel: StudentViewModel): RecyclerVie
                 val student = Student(ids[i], names[i])
                 viewModel.addStudent(student)
             }
-        }
+        } */
     }
 
     class StudentViewHolder(val view:View): RecyclerView.ViewHolder(view){
