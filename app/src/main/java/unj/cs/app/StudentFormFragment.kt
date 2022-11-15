@@ -90,7 +90,7 @@ class StudentFormFragment : Fragment() {
                     student._id = _idParam!!
                     //viewModel._studentList[positionParam!!] = student
                     viewModel.setStudent(student)
-                    toastMessage = "Student data was Edited"
+                    toastMessage = "${student.name} was Edited"
                 }
             } ?: run {
                 //viewModel.addStudent(student)
