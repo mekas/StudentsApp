@@ -36,7 +36,7 @@ class StudentFormFragment : Fragment() {
 
     private var _binding: FragmentStudentFormBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: StudentViewModel by viewModels()
+    private val viewModel: StudentViewModel by viewModels {StudentViewModel.Factory}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,16 +89,14 @@ class StudentFormFragment : Fragment() {
                 nameParam?.let {
                     student._id = _idParam!!
                     //viewModel._studentList[positionParam!!] = student
-                    viewModel.setStudent(student, studentDao)
+                    viewModel.setStudent(student)
                     toastMessage = "Student data was Edited"
                 }
             } ?: run {
                 //viewModel.addStudent(student)
-                viewModel.addStudent(student, studentDao)
+                viewModel.addStudent(student)
                 toastMessage = "${student.name} was Added"
             }
-
-            //StudentList.list = studentList
 
             val action =
                 StudentFormFragmentDirections.actionStudentFormFragmentToStudentListFragment()
@@ -118,7 +116,7 @@ class StudentFormFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String, param3: Int = -1, param4: Int = -1) =
+        fun newInstance(param1: String, param2: String, param3: Int, param4: Int) =
             StudentFormFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_UID, param1)

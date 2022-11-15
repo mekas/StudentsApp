@@ -11,10 +11,13 @@ import unj.cs.app.data.Student
 import unj.cs.app.data.StudentList
 import unj.cs.app.data.StudentViewModel
 
-class StudentAdapter(context: Context, viewModel: StudentViewModel): RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
+class StudentAdapter(viewModel: StudentViewModel): RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
     //private var studentList:MutableList<Student> = StudentList.list
     private val viewModel: StudentViewModel = viewModel
     init{
+        if(viewModel.studentList.value == null){
+            viewModel.loadStudent()
+        }
         /*
         if(viewModel.studentList.value!!.isEmpty()){
             val names = context.resources.getStringArray(R.array.student_names).toList()
@@ -32,11 +35,12 @@ class StudentAdapter(context: Context, viewModel: StudentViewModel): RecyclerVie
     }
 
     override fun getItemCount(): Int {
-        return viewModel.studentList.value!!.size
+        return viewModel.count()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         val layout = LayoutInflater.from(parent.context).inflate(R.layout.item_view_student, parent, false)
+
         return StudentViewHolder(layout)
     }
 

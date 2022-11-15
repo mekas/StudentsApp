@@ -5,8 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
+
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -14,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import unj.cs.app.databinding.FragmentStudentListBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.textfield.TextInputEditText
-import unj.cs.app.data.Student
+
 import unj.cs.app.data.StudentViewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,7 +32,7 @@ class StudentListFragment : Fragment() {
     private var _binding: FragmentStudentListBinding? = null
     private val binding get() = _binding!!
     private lateinit var  studentRecyclerView: RecyclerView;
-    private val viewModel : StudentViewModel by viewModels()
+    private val viewModel : StudentViewModel by viewModels(){StudentViewModel.Factory}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +40,9 @@ class StudentListFragment : Fragment() {
             toastParam = it.getString(ARG_PARAM1)
         }
 
-        studentAdapter = StudentAdapter(requireContext(), viewModel)
+        studentAdapter = context?.let {
+            StudentAdapter(viewModel)
+        }
     }
 
     override fun onCreateView(
@@ -52,15 +52,16 @@ class StudentListFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentStudentListBinding.inflate(inflater, container, false)
         //_binding!!.viewModel = viewModel
+        //load student adapter with preload data
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         studentRecyclerView = binding.recyclerViewStudent
+        studentRecyclerView.adapter = studentAdapter
         studentRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        studentRecyclerView.adapter = studentAdapter
         studentRecyclerView.addItemDecoration(
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         )
@@ -70,7 +71,7 @@ class StudentListFragment : Fragment() {
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
 
         fab.setOnClickListener(){
-            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment()
+            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment(null, null)
             view.findNavController().navigate(action)
         }
     }

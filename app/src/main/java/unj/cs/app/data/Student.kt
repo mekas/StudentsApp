@@ -5,9 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Student(
+    @PrimaryKey(autoGenerate = true)
+    var _id: Int = -1,
     val uid:String,
     val name:String
 ){
-    @PrimaryKey(autoGenerate = true)
-    var _id: Int = -1
+    constructor(uid: String, name: String): this(0, uid, name)
 }

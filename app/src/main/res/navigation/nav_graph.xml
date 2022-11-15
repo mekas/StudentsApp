@@ -21,10 +21,12 @@
                 android:defaultValue="-1" />
             <argument
                 android:name="argStudentId"
-                android:defaultValue="null" />
+                app:nullable="true"
+                />
             <argument
                 android:name="argStudentName"
-                android:defaultValue="null" />
+                app:nullable="true"
+                />
         </action>
     </fragment>
     <fragment
