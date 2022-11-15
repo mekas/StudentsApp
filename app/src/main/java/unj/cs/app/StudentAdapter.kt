@@ -15,8 +15,9 @@ class StudentAdapter(viewModel: StudentViewModel): RecyclerView.Adapter<StudentA
     //private var studentList:MutableList<Student> = StudentList.list
     private val viewModel: StudentViewModel = viewModel
     init{
+        viewModel.loadStudent()
         if(viewModel.studentList.value == null){
-            viewModel.loadStudent()
+            viewModel._studentList.value = mutableListOf<Student>()
         }
         /*
         if(viewModel.studentList.value!!.isEmpty()){

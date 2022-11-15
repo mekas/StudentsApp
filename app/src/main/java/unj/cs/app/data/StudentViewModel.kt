@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class StudentViewModel(private val dao: StudentDao, private val savedStateHandle: SavedStateHandle) : ViewModel() {
-    val STATE_KEY:String = "studentList"
+    private val STATE_KEY:String = "studentList"
     var _studentList: MutableLiveData<List<Student>> = savedStateHandle.getLiveData<List<Student>>(STATE_KEY)
     val studentList: LiveData<List<Student>> get() = _studentList
 
